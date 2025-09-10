@@ -1,0 +1,11 @@
+<h2>Dashboard</h2>
+
+<button (click)="loadProfile()" [disabled]="loading">Carica profilo</button>
+<p *ngIf="error">{{ error }}</p>
+
+<div *ngIf="auth.user() as u">
+    <p><b>{{ u.email }}</b> (ruolo: {{ u.role }})</p>
+    <img *ngIf="u.avatar" [src]="u.avatar" width="80" alt="avatar" />
+</div>
+<p><a routerLink="/admin">vai nella sezione Admin</a></p>
+<button (click)="logout()">Logout</button>
