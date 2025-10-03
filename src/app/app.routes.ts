@@ -17,4 +17,18 @@ export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login' },
     { path: '**', redirectTo: 'login' }
 
+    /*
+    path: '',
+    canActivate: [canActivateRole(['admin'])],
+    children: [
+      {
+        path: 'admin',
+        loadComponent: () => import('./pages/admin/admin.page')
+      },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard.page')
+      },
+*/
+
 ];

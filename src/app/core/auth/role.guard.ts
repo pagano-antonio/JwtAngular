@@ -8,7 +8,7 @@ export function canActivateRole(allowed: string[]): CanActivateFn {
         const auth = inject(AuthService);
         const router = inject(Router);
 
-        // deve esistere il token
+
         if (!auth.token) return router.parseUrl('/login');
 
         // se il profilo è già in memoria
@@ -17,10 +17,16 @@ export function canActivateRole(allowed: string[]): CanActivateFn {
             return allowed.includes(u.role) ? true : router.parseUrl('/forbidden');
         }
 
-        // prova a caricare il profilo adesso
         return auth.fetchProfile().pipe(
-            map(profile => allowed.includes(profile.role) ? true : router.parseUrl('/forbidden')),
-            catchError(() => of(router.parseUrl('/login'))) // token invalido/scaduto
+            map(profile => {
+                console.log("Ruolo utente:", profile.role);
+                return allowed.includes(profile.role)
+                    ? true
+                    : router.parseUrl('/forbidden');
+            }
+            ),
+            catchError(
+                () => of(router.parseUrl('/login'))) // token invalido/scaduto
         );
     };
 }

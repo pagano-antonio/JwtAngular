@@ -25,5 +25,16 @@ export default class DashboardPage {
         });
     }
 
-    logout() { this.auth.logout(); this.router.navigateByUrl('/login'); }
+    // << NUOVO
+    invalidateToken() {
+        // “rompo” l’access token: l’interceptor continuerà ad allegarlo ma sarà invalido
+        sessionStorage.setItem('access_token', 'BROKEN.' + Date.now());
+        this.error = 'Token invalidato (di test). Prova "Carica profilo" per vedere il 401.';
+    }
+    // >>
+
+    logout() {
+        this.auth.logout();
+        this.router.navigateByUrl('/login');
+    }
 }

@@ -26,7 +26,6 @@ export default class LoginPage {
 
         this.auth.login(this.email, this.password).subscribe({
             next: () => {
-                // token salvato: vai in dashboard
                 this.router.navigateByUrl('/dashboard');
             },
             error: () => {
